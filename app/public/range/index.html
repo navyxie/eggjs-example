@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>投资风格</title>
+<meta name="keywords" content="智能 投资 顾问" />
+<meta name="description" content="智能投资顾问" />
+<link rel="stylesheet" href="./jquery.range.css">
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+html,body {
+	max-width: 640px;
+	margin: 0 auto;
+	color: #999;
+}
+h2 {
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+  font-weight: 400;
+}
+.list {
+	width:90%;
+	margin:0 auto;
+  padding: 10px 0;
+}
+.demo {
+	margin: 20px auto;
+	width: 100%;
+	display: block;
+}
+.theme-green .back-bar .pointer-label {
+	width: 100%;
+	text-align: center;
+}
+.fr {
+	float: right;
+}
+.twoOption span{
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+}
+.twoOption .demo {
+	margin: 0 auto;
+}
+.threeOption span {
+	display: inline-block;
+	width: 32%;
+	text-align: center;
+}
+.threeOption .demo {
+	margin: 0 auto;
+}
+#footer{
+	width: 100%;
+	height:40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	background: blue;
+}
+.selected {
+	color: blue;
+}
+#showImage {
+	display: none;
+}
+#showImage img{
+	max-width: 100%;
+}
+</style>
+
+<script src="./jquery.min.js"></script>
+<script src="./jquery.range.js"></script>
+<script>
+$(function(){
+	$('.age-slider').jRange({
+		from: 10,
+		to: 80,
+		step: 1,
+		scale: [10,25,40,65,80],
+		format: '%s',
+		width: '100%',
+		showLabels: true,
+		showScale: true
+	});
+	$('.retire-slider').jRange({
+		from: 50,
+		to: 70,
+		step: 1,
+		scale: [50,55,60,65,70],
+		format: '%s',
+		width: '100%',
+		showLabels: true,
+		showScale: true
+	});
+	$('#married').click('.married', function(e) {
+		if ($(e.target).hasClass('married')) {
+			$('.married').removeClass('selected');
+			$(e.target).addClass('selected');
+		}
+	});
+	$('#style').click('.item', function(e) {
+		if ($(e.target).hasClass('item')) {
+			$('.item').removeClass('selected');
+			$(e.target).addClass('selected');
+		}
+	});
+	$('#footer').click(function(e) {
+		var selectedObj = $('.item.selected');
+		var text = '';
+		var imageName = 'wenjian';
+		if (selectedObj.length) {
+			text = selectedObj.text();
+		}
+		if (text === '平衡') {
+			imageName = 'wenjian'
+		} else if (text === '进取') {
+			imageName = 'jinqu'
+		} else {
+			imageName = 'wenjian'
+		}
+		$('#main').hide();
+		$('#showImage').show().find('#img').attr('src', './' + imageName + '.jpeg');
+	});
+	$('#showImage').click(function () {
+		$('#main').show();
+		$('#showImage').hide();
+	})
+});
+</script>
+</head>
+<body>
+	<div id="showImage">
+		<img id="img" src="" />
+	</div>
+	<div id="main">
+		<div class="list">
+			<h2>您的年龄是？</h2>
+			<div class="demo">
+				<input type="hidden" class="age-slider" value="35" />
+			</div>
+		</div>
+		<div class="list">
+			<h2>您期望多少岁退休？</h2>
+			<div class="demo">
+				<input type="hidden" class="retire-slider" value="65" />
+			</div>
+		</div>
+		<div class="list twoOption" id="married">
+			<h2>是否已婚？</h2>
+			<div class="demo">
+				<span class="married fr">No</span><span class="married fl">Yes</span>
+			</div>
+		</div>
+		<div class="list threeOption" id="style">
+			<h2>您觉得什么样的方式您比较接受？</h2>
+			<div class="demo">
+				<span class="item item0">保守</span>
+				<span class="item item1">平衡</span>
+				<span class="item item2">进取</span>
+			</div>
+		</div>
+		<div class="list">
+			<p class="desc">有一定的风险承受能力，对投资收益比较敏感，但也期望通过长期且持续的投资获得高于平均水平的回报，比较适合风险和报酬率相对较高的投资产品</p>
+		</div>
+		<div class="list twoOption">
+			<h2>家庭年收入</h2>
+			<div class="demo">
+				<p>¥ 20,000,000</p>
+			</div>
+		</div>
+		<div id="footer">提交</div>
+	</div>
+</body>
+</html>
